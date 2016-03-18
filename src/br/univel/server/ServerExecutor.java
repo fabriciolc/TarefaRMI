@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.univel.common.ExecutorRMI;
 import br.univel.common.Tarefa;
@@ -11,10 +13,11 @@ import br.univel.common.Tarefa;
 public class ServerExecutor implements ExecutorRMI {
 
 	@Override
-	public <P, R> R executar(Tarefa<P, R> tarefa, P p) 
+	public <P, R> List<R> executar(Tarefa<P, R> tarefa, P p) 
 			throws RemoteException {
 		System.out.println("S Recebendo tarefa.");
-		R res = tarefa.executar(p);
+		List<R> res = new ArrayList<>();
+			res.add(tarefa.executar(p));
 		System.out.println("S Terminado de executar.");
 		return res;
 	}

@@ -4,6 +4,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.List;
 
 import br.univel.common.ExecutorRMI;
 
@@ -20,7 +21,7 @@ public class ClientExecutor {
 			servico = (ExecutorRMI) registry
 					.lookup(ExecutorRMI.NOME);
 			
-			Integer res = servico.executar(new CalculoDemorado(), 3);
+			List<List<Integer>> res = servico.executar(new CalculoDemorado(), 10);
 			
 			System.out.println("Resposta: " + res);
 			

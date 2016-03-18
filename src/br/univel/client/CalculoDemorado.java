@@ -1,27 +1,39 @@
 package br.univel.client;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.univel.common.Tarefa;
 
 class CalculoDemorado 
-		implements Tarefa<Integer, Integer>,
+		implements Tarefa<Integer, List<Integer>>,
 		Serializable {
 
 	@Override
-	public Integer executar(Integer p) {
-		System.out.println("T Iniciando execução.");
+	public List<Integer> executar(Integer p) {
+		List<Integer> retorno = new ArrayList<>();
 		try {
-			for (int i = 0; i < 10; i++) {
-				System.out.print(".");
-				Thread.sleep(1_000);
-			}
-			System.out.println("");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			for(int i=1; i<=p; i++){
+				Thread.sleep(1000);
+	            retorno.add(fibonacciRecusion(i));
+	        }
+			System.out.println(retorno);
+			return retorno;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			
+			return retorno;
 		}
-		System.out.println("T Terminando execução.");
-		return p * 2;
+		
 	}
+	 public static int fibonacciRecusion(int number){
+	        if(number == 1 || number == 2){
+	            return 1;
+	        }
+	 
+	        return fibonacciRecusion(number-1) + fibonacciRecusion(number -2); //tail recursion
+	    }
 
 }
